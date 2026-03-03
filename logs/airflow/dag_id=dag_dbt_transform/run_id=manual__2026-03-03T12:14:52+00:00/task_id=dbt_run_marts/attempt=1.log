@@ -1,0 +1,38 @@
+[2026-03-03T12:15:43.158+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_run_marts manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T12:15:43.163+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_run_marts manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T12:15:43.163+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-03T12:15:43.170+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run_marts> on 2026-03-03 12:14:52+00:00
+[2026-03-03T12:15:43.173+0000] {standard_task_runner.py:60} INFO - Started process 430 to run task
+[2026-03-03T12:15:43.177+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_dbt_transform', 'dbt_run_marts', 'manual__2026-03-03T12:14:52+00:00', '--job-id', '143', '--raw', '--subdir', 'DAGS_FOLDER/dag_dbt_transform.py', '--cfg-path', '/tmp/tmptka8blv0']
+[2026-03-03T12:15:43.179+0000] {standard_task_runner.py:88} INFO - Job 143: Subtask dbt_run_marts
+[2026-03-03T12:15:43.220+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_dbt_transform.dbt_run_marts manual__2026-03-03T12:14:52+00:00 [running]> on host c4473bd42d91
+[2026-03-03T12:15:43.290+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_dbt_transform' AIRFLOW_CTX_TASK_ID='dbt_run_marts' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T12:14:52+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T12:14:52+00:00'
+[2026-03-03T12:15:43.291+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-03-03T12:15:43.292+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/***/dbt && dbt run --select marts --profiles-dir /opt/***/dbt --project-dir /opt/***/dbt']
+[2026-03-03T12:15:43.297+0000] {subprocess.py:86} INFO - Output:
+[2026-03-03T12:15:44.465+0000] {subprocess.py:93} INFO - [0m12:15:44  Running with dbt=1.11.6
+[2026-03-03T12:15:44.653+0000] {subprocess.py:93} INFO - [0m12:15:44  Registered adapter: clickhouse=1.10.0
+[2026-03-03T12:15:44.970+0000] {subprocess.py:93} INFO - [0m12:15:44  Found 12 models, 32 data tests, 6 sources, 523 macros
+[2026-03-03T12:15:44.972+0000] {subprocess.py:93} INFO - [0m12:15:44
+[2026-03-03T12:15:44.973+0000] {subprocess.py:93} INFO - [0m12:15:44  Concurrency: 4 threads (target='dev')
+[2026-03-03T12:15:44.973+0000] {subprocess.py:93} INFO - [0m12:15:44
+[2026-03-03T12:15:45.431+0000] {subprocess.py:93} INFO - [0m12:15:45  1 of 5 START sql table model `staging_analytics`.`dim_date` .................... [RUN]
+[2026-03-03T12:15:45.432+0000] {subprocess.py:93} INFO - [0m12:15:45  2 of 5 START sql table model `staging_analytics`.`dim_products` ................ [RUN]
+[2026-03-03T12:15:45.432+0000] {subprocess.py:93} INFO - [0m12:15:45  3 of 5 START sql table model `staging_analytics`.`dim_sellers` ................. [RUN]
+[2026-03-03T12:15:45.433+0000] {subprocess.py:93} INFO - [0m12:15:45  4 of 5 START sql table model `staging_analytics`.`dim_users` ................... [RUN]
+[2026-03-03T12:15:45.667+0000] {subprocess.py:93} INFO - [0m12:15:45  2 of 5 OK created sql table model `staging_analytics`.`dim_products` ........... [[32mOK[0m in 0.23s]
+[2026-03-03T12:15:45.668+0000] {subprocess.py:93} INFO - [0m12:15:45  1 of 5 OK created sql table model `staging_analytics`.`dim_date` ............... [[32mOK[0m in 0.23s]
+[2026-03-03T12:15:45.676+0000] {subprocess.py:93} INFO - [0m12:15:45  5 of 5 START sql table model `staging_analytics`.`fact_orders` ................. [RUN]
+[2026-03-03T12:15:45.709+0000] {subprocess.py:93} INFO - [0m12:15:45  4 of 5 OK created sql table model `staging_analytics`.`dim_users` .............. [[32mOK[0m in 0.27s]
+[2026-03-03T12:15:45.709+0000] {subprocess.py:93} INFO - [0m12:15:45  3 of 5 OK created sql table model `staging_analytics`.`dim_sellers` ............ [[32mOK[0m in 0.27s]
+[2026-03-03T12:15:45.891+0000] {subprocess.py:93} INFO - [0m12:15:45  5 of 5 OK created sql table model `staging_analytics`.`fact_orders` ............ [[32mOK[0m in 0.21s]
+[2026-03-03T12:15:45.900+0000] {subprocess.py:93} INFO - [0m12:15:45
+[2026-03-03T12:15:45.901+0000] {subprocess.py:93} INFO - [0m12:15:45  Finished running 5 table models in 0 hours 0 minutes and 0.93 seconds (0.93s).
+[2026-03-03T12:15:46.017+0000] {subprocess.py:93} INFO - [0m12:15:46
+[2026-03-03T12:15:46.021+0000] {subprocess.py:93} INFO - [0m12:15:46  [32mCompleted successfully[0m
+[2026-03-03T12:15:46.025+0000] {subprocess.py:93} INFO - [0m12:15:46
+[2026-03-03T12:15:46.028+0000] {subprocess.py:93} INFO - [0m12:15:46  Done. PASS=5 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=5
+[2026-03-03T12:15:47.689+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-03-03T12:15:47.723+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag_dbt_transform, task_id=dbt_run_marts, execution_date=20260303T121452, start_date=20260303T121543, end_date=20260303T121547
+[2026-03-03T12:15:47.774+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-03T12:15:47.806+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,18 @@
+[2026-03-03T03:45:17.747+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_ingest_daily.validate manual__2026-03-03T03:45:10+00:00 [queued]>
+[2026-03-03T03:45:17.757+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_ingest_daily.validate manual__2026-03-03T03:45:10+00:00 [queued]>
+[2026-03-03T03:45:17.758+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-03-03T03:45:17.774+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): validate> on 2026-03-03 03:45:10+00:00
+[2026-03-03T03:45:17.779+0000] {standard_task_runner.py:60} INFO - Started process 12369 to run task
+[2026-03-03T03:45:17.803+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_ingest_daily', 'validate', 'manual__2026-03-03T03:45:10+00:00', '--job-id', '58', '--raw', '--subdir', 'DAGS_FOLDER/dag_ingest_daily.py', '--cfg-path', '/tmp/tmppdfwcf8y']
+[2026-03-03T03:45:17.813+0000] {standard_task_runner.py:88} INFO - Job 58: Subtask validate
+[2026-03-03T03:45:17.990+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_ingest_daily.validate manual__2026-03-03T03:45:10+00:00 [running]> on host c320bbf31b63
+[2026-03-03T03:45:18.194+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_ingest_daily' AIRFLOW_CTX_TASK_ID='validate' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T03:45:10+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T03:45:10+00:00'
+[2026-03-03T03:45:18.615+0000] {validator.py:143} INFO - ✅ PASS [users]: 500 rows kept, 0 rejected
+[2026-03-03T03:45:18.616+0000] {validator.py:143} INFO - ✅ PASS [sellers]: 50 rows kept, 0 rejected
+[2026-03-03T03:45:18.616+0000] {validator.py:143} INFO - ✅ PASS [products]: 200 rows kept, 0 rejected
+[2026-03-03T03:45:18.617+0000] {validator.py:143} INFO - ✅ PASS [categories]: 10 rows kept, 0 rejected
+[2026-03-03T03:45:18.643+0000] {logging_mixin.py:188} INFO - ✅ Validation complete — 4 tables passed
+[2026-03-03T03:45:18.645+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-03T03:45:18.661+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag_ingest_daily, task_id=validate, execution_date=20260303T034510, start_date=20260303T034517, end_date=20260303T034518
+[2026-03-03T03:45:18.713+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-03T03:45:18.740+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

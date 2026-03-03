@@ -1,0 +1,20 @@
+[2026-03-01T02:39:53.147+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_ingest_daily.validate manual__2026-03-01T02:39:44+00:00 [queued]>
+[2026-03-01T02:39:53.164+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_ingest_daily.validate manual__2026-03-01T02:39:44+00:00 [queued]>
+[2026-03-01T02:39:53.165+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-03-01T02:39:53.192+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): validate> on 2026-03-01 02:39:44+00:00
+[2026-03-01T02:39:53.205+0000] {standard_task_runner.py:60} INFO - Started process 394 to run task
+[2026-03-01T02:39:53.211+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_ingest_daily', 'validate', 'manual__2026-03-01T02:39:44+00:00', '--job-id', '33', '--raw', '--subdir', 'DAGS_FOLDER/dag_ingest_daily.py', '--cfg-path', '/tmp/tmpud1co1qm']
+[2026-03-01T02:39:53.215+0000] {standard_task_runner.py:88} INFO - Job 33: Subtask validate
+[2026-03-01T02:39:53.346+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_ingest_daily.validate manual__2026-03-01T02:39:44+00:00 [running]> on host c320bbf31b63
+[2026-03-01T02:39:53.495+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_ingest_daily' AIRFLOW_CTX_TASK_ID='validate' AIRFLOW_CTX_EXECUTION_DATE='2026-03-01T02:39:44+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-01T02:39:44+00:00'
+[2026-03-01T02:39:53.983+0000] {validator.py:143} INFO - ✅ PASS [users]: 500 rows kept, 0 rejected
+[2026-03-01T02:39:53.984+0000] {validator.py:143} INFO - ✅ PASS [sellers]: 50 rows kept, 0 rejected
+[2026-03-01T02:39:53.986+0000] {validator.py:143} INFO - ✅ PASS [products]: 200 rows kept, 0 rejected
+[2026-03-01T02:39:53.987+0000] {validator.py:143} INFO - ✅ PASS [categories]: 10 rows kept, 0 rejected
+[2026-03-01T02:39:53.988+0000] {validator.py:143} INFO - ✅ PASS [orders]: 5 rows kept, 0 rejected
+[2026-03-01T02:39:53.989+0000] {validator.py:143} INFO - ✅ PASS [order_items]: 11 rows kept, 0 rejected
+[2026-03-01T02:39:54.020+0000] {logging_mixin.py:188} INFO - ✅ Validation complete — 6 tables passed
+[2026-03-01T02:39:54.020+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-01T02:39:54.033+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag_ingest_daily, task_id=validate, execution_date=20260301T023944, start_date=20260301T023953, end_date=20260301T023954
+[2026-03-01T02:39:54.094+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-01T02:39:54.123+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

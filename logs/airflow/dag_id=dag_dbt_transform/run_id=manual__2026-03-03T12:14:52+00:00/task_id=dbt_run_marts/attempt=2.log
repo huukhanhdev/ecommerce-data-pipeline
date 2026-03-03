@@ -1,0 +1,70 @@
+[2026-03-03T13:15:01.667+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_run_marts manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T13:15:01.772+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_run_marts manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T13:15:01.774+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 3
+[2026-03-03T13:15:01.839+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run_marts> on 2026-03-03 12:14:52+00:00
+[2026-03-03T13:15:01.869+0000] {standard_task_runner.py:60} INFO - Started process 1465 to run task
+[2026-03-03T13:15:01.922+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_dbt_transform', 'dbt_run_marts', 'manual__2026-03-03T12:14:52+00:00', '--job-id', '233', '--raw', '--subdir', 'DAGS_FOLDER/dag_dbt_transform.py', '--cfg-path', '/tmp/tmpkc3rpyvx']
+[2026-03-03T13:15:02.215+0000] {standard_task_runner.py:88} INFO - Job 233: Subtask dbt_run_marts
+[2026-03-03T13:15:03.135+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_dbt_transform.dbt_run_marts manual__2026-03-03T12:14:52+00:00 [running]> on host 353218a5daef
+[2026-03-03T13:15:04.719+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_dbt_transform' AIRFLOW_CTX_TASK_ID='dbt_run_marts' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T12:14:52+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T12:14:52+00:00'
+[2026-03-03T13:15:04.740+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-03-03T13:15:04.748+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/***/dbt && dbt run --select marts --profiles-dir /opt/***/dbt --project-dir /opt/***/dbt']
+[2026-03-03T13:15:04.813+0000] {subprocess.py:86} INFO - Output:
+[2026-03-03T13:15:24.358+0000] {subprocess.py:93} INFO - [0m13:15:24  Running with dbt=1.11.6
+[2026-03-03T13:15:27.249+0000] {subprocess.py:93} INFO - [0m13:15:27  Registered adapter: clickhouse=1.10.0
+[2026-03-03T13:15:29.891+0000] {subprocess.py:93} INFO - [0m13:15:29  Found 12 models, 32 data tests, 6 sources, 523 macros
+[2026-03-03T13:15:29.918+0000] {subprocess.py:93} INFO - [0m13:15:29
+[2026-03-03T13:15:29.922+0000] {subprocess.py:93} INFO - [0m13:15:29  Concurrency: 4 threads (target='dev')
+[2026-03-03T13:15:29.923+0000] {subprocess.py:93} INFO - [0m13:15:29
+[2026-03-03T13:15:38.977+0000] {subprocess.py:93} INFO - [0m13:15:38  1 of 5 START sql table model `staging_analytics`.`dim_date` .................... [RUN]
+[2026-03-03T13:15:39.000+0000] {subprocess.py:93} INFO - [0m13:15:38  2 of 5 START sql table model `staging_analytics`.`dim_products` ................ [RUN]
+[2026-03-03T13:15:39.064+0000] {subprocess.py:93} INFO - [0m13:15:39  3 of 5 START sql table model `staging_analytics`.`dim_sellers` ................. [RUN]
+[2026-03-03T13:15:39.147+0000] {subprocess.py:93} INFO - [0m13:15:39  4 of 5 START sql table model `staging_analytics`.`dim_users` ................... [RUN]
+[2026-03-03T13:15:43.285+0000] {subprocess.py:93} INFO - [0m13:15:43  2 of 5 ERROR creating sql table model `staging_analytics`.`dim_products` ....... [[31mERROR[0m in 3.68s]
+[2026-03-03T13:15:43.331+0000] {subprocess.py:93} INFO - [0m13:15:43  1 of 5 ERROR creating sql table model `staging_analytics`.`dim_date` ........... [[31mERROR[0m in 3.87s]
+[2026-03-03T13:15:43.723+0000] {subprocess.py:93} INFO - [0m13:15:43  5 of 5 SKIP relation staging_analytics.fact_orders ............................. [[33mSKIP[0m]
+[2026-03-03T13:15:43.938+0000] {subprocess.py:93} INFO - [0m13:15:43  4 of 5 ERROR creating sql table model `staging_analytics`.`dim_users` .......... [[31mERROR[0m in 4.66s]
+[2026-03-03T13:15:43.978+0000] {subprocess.py:93} INFO - [0m13:15:43  3 of 5 ERROR creating sql table model `staging_analytics`.`dim_sellers` ........ [[31mERROR[0m in 4.86s]
+[2026-03-03T13:15:44.370+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.380+0000] {subprocess.py:93} INFO - [0m13:15:44  Finished running 5 table models in 0 hours 0 minutes and 14.44 seconds (14.44s).
+[2026-03-03T13:15:44.786+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.789+0000] {subprocess.py:93} INFO - [0m13:15:44  [31mCompleted with 4 errors, 0 partial successes, and 0 warnings:[0m
+[2026-03-03T13:15:44.792+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.800+0000] {subprocess.py:93} INFO - [0m13:15:44  [31mFailure in model dim_date (models/marts/dim_date.sql)[0m
+[2026-03-03T13:15:44.805+0000] {subprocess.py:93} INFO - [0m13:15:44    Database Error in model dim_date (models/marts/dim_date.sql)
+[2026-03-03T13:15:44.806+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 57, server response: Code: 57. DB::Exception: Table staging_analytics.dim_date__dbt_backup already exists. (TABLE_ALREADY_EXISTS) (for url http://clickhouse_olap:8123)
+[2026-03-03T13:15:44.808+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.814+0000] {subprocess.py:93} INFO - [0m13:15:44    compiled code at target/compiled/ecommerce_dbt/models/marts/dim_date.sql
+[2026-03-03T13:15:44.817+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.818+0000] {subprocess.py:93} INFO - [0m13:15:44  [31mFailure in model dim_products (models/marts/dim_products.sql)[0m
+[2026-03-03T13:15:44.835+0000] {subprocess.py:93} INFO - [0m13:15:44    Database Error in model dim_products (models/marts/dim_products.sql)
+[2026-03-03T13:15:44.856+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 57, server response: Code: 57. DB::Exception: Table staging_analytics.dim_products__dbt_backup already exists. (TABLE_ALREADY_EXISTS) (for url http://clickhouse_olap:8123)
+[2026-03-03T13:15:44.857+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.858+0000] {subprocess.py:93} INFO - [0m13:15:44    compiled code at target/compiled/ecommerce_dbt/models/marts/dim_products.sql
+[2026-03-03T13:15:44.865+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.870+0000] {subprocess.py:93} INFO - [0m13:15:44  [31mFailure in model dim_users (models/marts/dim_users.sql)[0m
+[2026-03-03T13:15:44.875+0000] {subprocess.py:93} INFO - [0m13:15:44    Database Error in model dim_users (models/marts/dim_users.sql)
+[2026-03-03T13:15:44.875+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 57, server response: Code: 57. DB::Exception: Table staging_analytics.dim_users__dbt_backup already exists. (TABLE_ALREADY_EXISTS) (for url http://clickhouse_olap:8123)
+[2026-03-03T13:15:44.881+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.884+0000] {subprocess.py:93} INFO - [0m13:15:44    compiled code at target/compiled/ecommerce_dbt/models/marts/dim_users.sql
+[2026-03-03T13:15:44.886+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.888+0000] {subprocess.py:93} INFO - [0m13:15:44  [31mFailure in model dim_sellers (models/marts/dim_sellers.sql)[0m
+[2026-03-03T13:15:44.890+0000] {subprocess.py:93} INFO - [0m13:15:44    Database Error in model dim_sellers (models/marts/dim_sellers.sql)
+[2026-03-03T13:15:44.892+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 57, server response: Code: 57. DB::Exception: Table staging_analytics.dim_sellers__dbt_backup already exists. (TABLE_ALREADY_EXISTS) (for url http://clickhouse_olap:8123)
+[2026-03-03T13:15:44.893+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.895+0000] {subprocess.py:93} INFO - [0m13:15:44    compiled code at target/compiled/ecommerce_dbt/models/marts/dim_sellers.sql
+[2026-03-03T13:15:44.901+0000] {subprocess.py:93} INFO - [0m13:15:44
+[2026-03-03T13:15:44.908+0000] {subprocess.py:93} INFO - [0m13:15:44  Done. PASS=0 WARN=0 ERROR=4 SKIP=1 NO-OP=0 TOTAL=5
+[2026-03-03T13:15:50.420+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-03-03T13:15:50.574+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-03-03T13:15:50.622+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=dag_dbt_transform, task_id=dbt_run_marts, execution_date=20260303T121452, start_date=20260303T131501, end_date=20260303T131550
+[2026-03-03T13:15:50.725+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 233 for task dbt_run_marts (Bash command failed. The command returned a non-zero exit code 1.; 1465)
+[2026-03-03T13:15:50.805+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-03T13:15:51.210+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

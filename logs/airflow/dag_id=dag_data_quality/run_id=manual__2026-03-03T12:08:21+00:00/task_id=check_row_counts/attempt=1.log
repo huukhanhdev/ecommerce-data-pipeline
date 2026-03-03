@@ -1,0 +1,35 @@
+[2026-03-03T12:09:54.530+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_data_quality.check_row_counts manual__2026-03-03T12:08:21+00:00 [queued]>
+[2026-03-03T12:09:54.555+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_data_quality.check_row_counts manual__2026-03-03T12:08:21+00:00 [queued]>
+[2026-03-03T12:09:54.557+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2026-03-03T12:09:54.577+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_row_counts> on 2026-03-03 12:08:21+00:00
+[2026-03-03T12:09:54.585+0000] {standard_task_runner.py:60} INFO - Started process 896 to run task
+[2026-03-03T12:09:54.591+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_data_quality', 'check_row_counts', 'manual__2026-03-03T12:08:21+00:00', '--job-id', '129', '--raw', '--subdir', 'DAGS_FOLDER/dag_data_quality.py', '--cfg-path', '/tmp/tmp063n9x44']
+[2026-03-03T12:09:54.597+0000] {standard_task_runner.py:88} INFO - Job 129: Subtask check_row_counts
+[2026-03-03T12:09:54.749+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_data_quality.check_row_counts manual__2026-03-03T12:08:21+00:00 [running]> on host 858cd869c16e
+[2026-03-03T12:09:54.955+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_data_quality' AIRFLOW_CTX_TASK_ID='check_row_counts' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T12:08:21+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T12:08:21+00:00'
+[2026-03-03T12:09:56.012+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/dag_data_quality.py", line 57, in check_row_counts
+    count = client.command(f"SELECT count() FROM {t}")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 428, in command
+    response = self._raw_request(payload, params, headers, method, fields=fields, server_wait=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 567, in _raw_request
+    self._error_handler(response)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 484, in _error_handler
+    raise OperationalError(err_str) if retried else DatabaseError(err_str) from None
+clickhouse_connect.driver.exceptions.DatabaseError: Received ClickHouse exception, code: 60, server response: Code: 60. DB::Exception: Unknown table expression identifier 'dim_users' in scope SELECT count() FROM dim_users. (UNKNOWN_TABLE) (for url http://clickhouse_olap:8123)
+[2026-03-03T12:09:56.082+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dag_data_quality, task_id=check_row_counts, execution_date=20260303T120821, start_date=20260303T120954, end_date=20260303T120956
+[2026-03-03T12:09:56.112+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 129 for task check_row_counts (Received ClickHouse exception, code: 60, server response: Code: 60. DB::Exception: Unknown table expression identifier 'dim_users' in scope SELECT count() FROM dim_users. (UNKNOWN_TABLE) (for url http://clickhouse_olap:8123); 896)
+[2026-03-03T12:09:56.178+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-03T12:09:56.276+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

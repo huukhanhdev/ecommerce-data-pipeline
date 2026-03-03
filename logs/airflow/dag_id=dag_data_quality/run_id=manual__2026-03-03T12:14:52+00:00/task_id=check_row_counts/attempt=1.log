@@ -1,0 +1,32 @@
+[2026-03-03T12:16:24.307+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_data_quality.check_row_counts manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T12:16:24.315+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_data_quality.check_row_counts manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T12:16:24.315+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2026-03-03T12:16:24.327+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_row_counts> on 2026-03-03 12:14:52+00:00
+[2026-03-03T12:16:24.331+0000] {standard_task_runner.py:60} INFO - Started process 582 to run task
+[2026-03-03T12:16:24.334+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_data_quality', 'check_row_counts', 'manual__2026-03-03T12:14:52+00:00', '--job-id', '149', '--raw', '--subdir', 'DAGS_FOLDER/dag_data_quality.py', '--cfg-path', '/tmp/tmprsinjlbd']
+[2026-03-03T12:16:24.341+0000] {standard_task_runner.py:88} INFO - Job 149: Subtask check_row_counts
+[2026-03-03T12:16:24.424+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_data_quality.check_row_counts manual__2026-03-03T12:14:52+00:00 [running]> on host c4473bd42d91
+[2026-03-03T12:16:24.543+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_data_quality' AIRFLOW_CTX_TASK_ID='check_row_counts' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T12:14:52+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T12:14:52+00:00'
+[2026-03-03T12:16:25.110+0000] {logging_mixin.py:188} INFO -   dim_users: 500 rows
+[2026-03-03T12:16:25.115+0000] {logging_mixin.py:188} INFO -   dim_products: 200 rows
+[2026-03-03T12:16:25.120+0000] {logging_mixin.py:188} INFO -   dim_sellers: 50 rows
+[2026-03-03T12:16:25.124+0000] {logging_mixin.py:188} INFO -   dim_date: 1,826 rows
+[2026-03-03T12:16:25.128+0000] {logging_mixin.py:188} INFO -   fact_orders: 0 rows
+[2026-03-03T12:16:25.129+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/dag_data_quality.py", line 63, in check_row_counts
+    raise ValueError(f"Data quality FAIL: {'; '.join(issues)}")
+ValueError: Data quality FAIL: fact_orders is EMPTY
+[2026-03-03T12:16:25.145+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dag_data_quality, task_id=check_row_counts, execution_date=20260303T121452, start_date=20260303T121624, end_date=20260303T121625
+[2026-03-03T12:16:25.159+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 149 for task check_row_counts (Data quality FAIL: fact_orders is EMPTY; 582)
+[2026-03-03T12:16:25.210+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-03T12:16:25.230+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,92 @@
+[2026-03-03T12:15:56.175+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_test manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T12:15:56.194+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_test manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T12:15:56.195+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-03T12:15:56.231+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_test> on 2026-03-03 12:14:52+00:00
+[2026-03-03T12:15:56.249+0000] {standard_task_runner.py:60} INFO - Started process 486 to run task
+[2026-03-03T12:15:56.269+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_dbt_transform', 'dbt_test', 'manual__2026-03-03T12:14:52+00:00', '--job-id', '145', '--raw', '--subdir', 'DAGS_FOLDER/dag_dbt_transform.py', '--cfg-path', '/tmp/tmp0tcplz90']
+[2026-03-03T12:15:56.289+0000] {standard_task_runner.py:88} INFO - Job 145: Subtask dbt_test
+[2026-03-03T12:15:56.378+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_dbt_transform.dbt_test manual__2026-03-03T12:14:52+00:00 [running]> on host c4473bd42d91
+[2026-03-03T12:15:56.522+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_dbt_transform' AIRFLOW_CTX_TASK_ID='dbt_test' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T12:14:52+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T12:14:52+00:00'
+[2026-03-03T12:15:56.525+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-03-03T12:15:56.527+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/***/dbt && dbt test --profiles-dir /opt/***/dbt --project-dir /opt/***/dbt']
+[2026-03-03T12:15:56.542+0000] {subprocess.py:86} INFO - Output:
+[2026-03-03T12:15:58.406+0000] {subprocess.py:93} INFO - [0m12:15:58  Running with dbt=1.11.6
+[2026-03-03T12:15:58.618+0000] {subprocess.py:93} INFO - [0m12:15:58  Registered adapter: clickhouse=1.10.0
+[2026-03-03T12:15:58.967+0000] {subprocess.py:93} INFO - [0m12:15:58  Found 12 models, 32 data tests, 6 sources, 523 macros
+[2026-03-03T12:15:58.970+0000] {subprocess.py:93} INFO - [0m12:15:58
+[2026-03-03T12:15:58.970+0000] {subprocess.py:93} INFO - [0m12:15:58  Concurrency: 4 threads (target='dev')
+[2026-03-03T12:15:58.971+0000] {subprocess.py:93} INFO - [0m12:15:58
+[2026-03-03T12:15:59.599+0000] {subprocess.py:93} INFO - [0m12:15:59  1 of 32 START test accepted_values_stg_orders_status__pending__confirmed__shipped__delivered__cancelled__returned  [RUN]
+[2026-03-03T12:15:59.600+0000] {subprocess.py:93} INFO - [0m12:15:59  2 of 32 START test not_null_dim_date_date_key .................................. [RUN]
+[2026-03-03T12:15:59.601+0000] {subprocess.py:93} INFO - [0m12:15:59  3 of 32 START test not_null_dim_products_product_key ........................... [RUN]
+[2026-03-03T12:15:59.601+0000] {subprocess.py:93} INFO - [0m12:15:59  4 of 32 START test not_null_dim_sellers_seller_key ............................. [RUN]
+[2026-03-03T12:15:59.689+0000] {subprocess.py:93} INFO - [0m12:15:59  1 of 32 PASS accepted_values_stg_orders_status__pending__confirmed__shipped__delivered__cancelled__returned  [[32mPASS[0m in 0.09s]
+[2026-03-03T12:15:59.705+0000] {subprocess.py:93} INFO - [0m12:15:59  2 of 32 PASS not_null_dim_date_date_key ........................................ [[32mPASS[0m in 0.10s]
+[2026-03-03T12:15:59.712+0000] {subprocess.py:93} INFO - [0m12:15:59  5 of 32 START test not_null_dim_users_user_key ................................. [RUN]
+[2026-03-03T12:15:59.714+0000] {subprocess.py:93} INFO - [0m12:15:59  6 of 32 START test not_null_fact_orders_date_key ............................... [RUN]
+[2026-03-03T12:15:59.750+0000] {subprocess.py:93} INFO - [0m12:15:59  4 of 32 PASS not_null_dim_sellers_seller_key ................................... [[32mPASS[0m in 0.15s]
+[2026-03-03T12:15:59.752+0000] {subprocess.py:93} INFO - [0m12:15:59  3 of 32 PASS not_null_dim_products_product_key ................................. [[32mPASS[0m in 0.15s]
+[2026-03-03T12:15:59.756+0000] {subprocess.py:93} INFO - [0m12:15:59  5 of 32 PASS not_null_dim_users_user_key ....................................... [[32mPASS[0m in 0.04s]
+[2026-03-03T12:15:59.760+0000] {subprocess.py:93} INFO - [0m12:15:59  7 of 32 START test not_null_fact_orders_order_item_key ......................... [RUN]
+[2026-03-03T12:15:59.761+0000] {subprocess.py:93} INFO - [0m12:15:59  8 of 32 START test not_null_fact_orders_product_key ............................ [RUN]
+[2026-03-03T12:15:59.764+0000] {subprocess.py:93} INFO - [0m12:15:59  6 of 32 PASS not_null_fact_orders_date_key ..................................... [[32mPASS[0m in 0.05s]
+[2026-03-03T12:15:59.766+0000] {subprocess.py:93} INFO - [0m12:15:59  9 of 32 START test not_null_fact_orders_user_key ............................... [RUN]
+[2026-03-03T12:15:59.782+0000] {subprocess.py:93} INFO - [0m12:15:59  10 of 32 START test not_null_stg_order_items_item_id ........................... [RUN]
+[2026-03-03T12:15:59.819+0000] {subprocess.py:93} INFO - [0m12:15:59  7 of 32 PASS not_null_fact_orders_order_item_key ............................... [[32mPASS[0m in 0.06s]
+[2026-03-03T12:15:59.822+0000] {subprocess.py:93} INFO - [0m12:15:59  8 of 32 PASS not_null_fact_orders_product_key .................................. [[32mPASS[0m in 0.06s]
+[2026-03-03T12:15:59.824+0000] {subprocess.py:93} INFO - [0m12:15:59  9 of 32 PASS not_null_fact_orders_user_key ..................................... [[32mPASS[0m in 0.06s]
+[2026-03-03T12:15:59.830+0000] {subprocess.py:93} INFO - [0m12:15:59  11 of 32 START test not_null_stg_order_items_order_id .......................... [RUN]
+[2026-03-03T12:15:59.832+0000] {subprocess.py:93} INFO - [0m12:15:59  12 of 32 START test not_null_stg_order_items_quantity .......................... [RUN]
+[2026-03-03T12:15:59.834+0000] {subprocess.py:93} INFO - [0m12:15:59  10 of 32 PASS not_null_stg_order_items_item_id ................................. [[32mPASS[0m in 0.05s]
+[2026-03-03T12:15:59.835+0000] {subprocess.py:93} INFO - [0m12:15:59  13 of 32 START test not_null_stg_order_items_unit_price ........................ [RUN]
+[2026-03-03T12:15:59.850+0000] {subprocess.py:93} INFO - [0m12:15:59  14 of 32 START test not_null_stg_orders_order_id ............................... [RUN]
+[2026-03-03T12:15:59.891+0000] {subprocess.py:93} INFO - [0m12:15:59  11 of 32 PASS not_null_stg_order_items_order_id ................................ [[32mPASS[0m in 0.06s]
+[2026-03-03T12:15:59.893+0000] {subprocess.py:93} INFO - [0m12:15:59  12 of 32 PASS not_null_stg_order_items_quantity ................................ [[32mPASS[0m in 0.06s]
+[2026-03-03T12:15:59.895+0000] {subprocess.py:93} INFO - [0m12:15:59  13 of 32 PASS not_null_stg_order_items_unit_price .............................. [[32mPASS[0m in 0.06s]
+[2026-03-03T12:15:59.901+0000] {subprocess.py:93} INFO - [0m12:15:59  15 of 32 START test not_null_stg_orders_status ................................. [RUN]
+[2026-03-03T12:15:59.903+0000] {subprocess.py:93} INFO - [0m12:15:59  16 of 32 START test not_null_stg_orders_user_id ................................ [RUN]
+[2026-03-03T12:15:59.904+0000] {subprocess.py:93} INFO - [0m12:15:59  17 of 32 START test not_null_stg_products_product_id ........................... [RUN]
+[2026-03-03T12:15:59.906+0000] {subprocess.py:93} INFO - [0m12:15:59  14 of 32 PASS not_null_stg_orders_order_id ..................................... [[32mPASS[0m in 0.05s]
+[2026-03-03T12:15:59.925+0000] {subprocess.py:93} INFO - [0m12:15:59  18 of 32 START test not_null_stg_users_email ................................... [RUN]
+[2026-03-03T12:15:59.963+0000] {subprocess.py:93} INFO - [0m12:15:59  15 of 32 PASS not_null_stg_orders_status ....................................... [[32mPASS[0m in 0.06s]
+[2026-03-03T12:15:59.966+0000] {subprocess.py:93} INFO - [0m12:15:59  16 of 32 PASS not_null_stg_orders_user_id ...................................... [[32mPASS[0m in 0.06s]
+[2026-03-03T12:15:59.973+0000] {subprocess.py:93} INFO - [0m12:15:59  17 of 32 PASS not_null_stg_products_product_id ................................. [[32mPASS[0m in 0.07s]
+[2026-03-03T12:15:59.974+0000] {subprocess.py:93} INFO - [0m12:15:59  19 of 32 START test not_null_stg_users_user_id ................................. [RUN]
+[2026-03-03T12:15:59.975+0000] {subprocess.py:93} INFO - [0m12:15:59  20 of 32 START test relationships_fact_orders_date_key__date_key__ref_dim_date_  [RUN]
+[2026-03-03T12:15:59.977+0000] {subprocess.py:93} INFO - [0m12:15:59  18 of 32 PASS not_null_stg_users_email ......................................... [[32mPASS[0m in 0.05s]
+[2026-03-03T12:15:59.981+0000] {subprocess.py:93} INFO - [0m12:15:59  21 of 32 START test relationships_fact_orders_product_key__product_key__ref_dim_products_  [RUN]
+[2026-03-03T12:15:59.994+0000] {subprocess.py:93} INFO - [0m12:15:59  22 of 32 START test relationships_fact_orders_user_key__user_key__ref_dim_users_  [RUN]
+[2026-03-03T12:16:00.034+0000] {subprocess.py:93} INFO - [0m12:16:00  19 of 32 PASS not_null_stg_users_user_id ....................................... [[32mPASS[0m in 0.06s]
+[2026-03-03T12:16:00.037+0000] {subprocess.py:93} INFO - [0m12:16:00  20 of 32 PASS relationships_fact_orders_date_key__date_key__ref_dim_date_ ...... [[32mPASS[0m in 0.06s]
+[2026-03-03T12:16:00.043+0000] {subprocess.py:93} INFO - [0m12:16:00  23 of 32 START test unique_dim_date_date_key ................................... [RUN]
+[2026-03-03T12:16:00.044+0000] {subprocess.py:93} INFO - [0m12:16:00  24 of 32 START test unique_dim_products_product_key ............................ [RUN]
+[2026-03-03T12:16:00.047+0000] {subprocess.py:93} INFO - [0m12:16:00  21 of 32 PASS relationships_fact_orders_product_key__product_key__ref_dim_products_  [[32mPASS[0m in 0.05s]
+[2026-03-03T12:16:00.050+0000] {subprocess.py:93} INFO - [0m12:16:00  22 of 32 PASS relationships_fact_orders_user_key__user_key__ref_dim_users_ ..... [[32mPASS[0m in 0.05s]
+[2026-03-03T12:16:00.065+0000] {subprocess.py:93} INFO - [0m12:16:00  25 of 32 START test unique_dim_sellers_seller_key .............................. [RUN]
+[2026-03-03T12:16:00.067+0000] {subprocess.py:93} INFO - [0m12:16:00  26 of 32 START test unique_dim_users_user_key .................................. [RUN]
+[2026-03-03T12:16:00.108+0000] {subprocess.py:93} INFO - [0m12:16:00  23 of 32 PASS unique_dim_date_date_key ......................................... [[32mPASS[0m in 0.06s]
+[2026-03-03T12:16:00.111+0000] {subprocess.py:93} INFO - [0m12:16:00  24 of 32 PASS unique_dim_products_product_key .................................. [[32mPASS[0m in 0.06s]
+[2026-03-03T12:16:00.121+0000] {subprocess.py:93} INFO - [0m12:16:00  27 of 32 START test unique_fact_orders_order_item_key .......................... [RUN]
+[2026-03-03T12:16:00.122+0000] {subprocess.py:93} INFO - [0m12:16:00  28 of 32 START test unique_stg_order_items_item_id ............................. [RUN]
+[2026-03-03T12:16:00.125+0000] {subprocess.py:93} INFO - [0m12:16:00  25 of 32 PASS unique_dim_sellers_seller_key .................................... [[32mPASS[0m in 0.06s]
+[2026-03-03T12:16:00.130+0000] {subprocess.py:93} INFO - [0m12:16:00  26 of 32 PASS unique_dim_users_user_key ........................................ [[32mPASS[0m in 0.06s]
+[2026-03-03T12:16:00.151+0000] {subprocess.py:93} INFO - [0m12:16:00  29 of 32 START test unique_stg_orders_order_id ................................. [RUN]
+[2026-03-03T12:16:00.159+0000] {subprocess.py:93} INFO - [0m12:16:00  30 of 32 START test unique_stg_products_product_id ............................. [RUN]
+[2026-03-03T12:16:00.226+0000] {subprocess.py:93} INFO - [0m12:16:00  27 of 32 PASS unique_fact_orders_order_item_key ................................ [[32mPASS[0m in 0.10s]
+[2026-03-03T12:16:00.230+0000] {subprocess.py:93} INFO - [0m12:16:00  28 of 32 PASS unique_stg_order_items_item_id ................................... [[32mPASS[0m in 0.10s]
+[2026-03-03T12:16:00.256+0000] {subprocess.py:93} INFO - [0m12:16:00  31 of 32 START test unique_stg_users_email ..................................... [RUN]
+[2026-03-03T12:16:00.262+0000] {subprocess.py:93} INFO - [0m12:16:00  32 of 32 START test unique_stg_users_user_id ................................... [RUN]
+[2026-03-03T12:16:00.270+0000] {subprocess.py:93} INFO - [0m12:16:00  29 of 32 PASS unique_stg_orders_order_id ....................................... [[32mPASS[0m in 0.11s]
+[2026-03-03T12:16:00.334+0000] {subprocess.py:93} INFO - [0m12:16:00  30 of 32 PASS unique_stg_products_product_id ................................... [[32mPASS[0m in 0.16s]
+[2026-03-03T12:16:00.382+0000] {subprocess.py:93} INFO - [0m12:16:00  31 of 32 PASS unique_stg_users_email ........................................... [[32mPASS[0m in 0.12s]
+[2026-03-03T12:16:00.386+0000] {subprocess.py:93} INFO - [0m12:16:00  32 of 32 PASS unique_stg_users_user_id ......................................... [[32mPASS[0m in 0.11s]
+[2026-03-03T12:16:00.403+0000] {subprocess.py:93} INFO - [0m12:16:00
+[2026-03-03T12:16:00.403+0000] {subprocess.py:93} INFO - [0m12:16:00  Finished running 32 data tests in 0 hours 0 minutes and 1.43 seconds (1.43s).
+[2026-03-03T12:16:00.556+0000] {subprocess.py:93} INFO - [0m12:16:00
+[2026-03-03T12:16:00.564+0000] {subprocess.py:93} INFO - [0m12:16:00  [32mCompleted successfully[0m
+[2026-03-03T12:16:00.610+0000] {subprocess.py:93} INFO - [0m12:16:00
+[2026-03-03T12:16:00.640+0000] {subprocess.py:93} INFO - [0m12:16:00  Done. PASS=32 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=32
+[2026-03-03T12:16:03.938+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-03-03T12:16:04.228+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag_dbt_transform, task_id=dbt_test, execution_date=20260303T121452, start_date=20260303T121556, end_date=20260303T121604
+[2026-03-03T12:16:04.514+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-03T12:16:04.794+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

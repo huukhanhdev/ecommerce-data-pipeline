@@ -1,0 +1,19 @@
+# Core Python
+pandas==2.2.1
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.28
+clickhouse-connect==0.13.0
+faker==24.1.0
+
+# Airflow (install separately via apt/pip in Dockerfile or poetry)
+# apache-airflow==2.8.1  <-- managed by Docker image
+
+# dbt
+dbt-clickhouse==1.10.0
+
+# PySpark (optional — managed inside Spark container)
+# pyspark==3.5.1
+
+# Utilities
+python-dotenv==1.0.1
+pyarrow==15.0.0      # for parquet support in Pandas

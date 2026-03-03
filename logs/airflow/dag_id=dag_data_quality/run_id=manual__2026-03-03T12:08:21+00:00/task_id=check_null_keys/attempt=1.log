@@ -1,0 +1,41 @@
+[2026-03-03T12:09:54.563+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_data_quality.check_null_keys manual__2026-03-03T12:08:21+00:00 [queued]>
+[2026-03-03T12:09:54.584+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_data_quality.check_null_keys manual__2026-03-03T12:08:21+00:00 [queued]>
+[2026-03-03T12:09:54.585+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2026-03-03T12:09:54.610+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_null_keys> on 2026-03-03 12:08:21+00:00
+[2026-03-03T12:09:54.623+0000] {standard_task_runner.py:60} INFO - Started process 897 to run task
+[2026-03-03T12:09:54.627+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_data_quality', 'check_null_keys', 'manual__2026-03-03T12:08:21+00:00', '--job-id', '130', '--raw', '--subdir', 'DAGS_FOLDER/dag_data_quality.py', '--cfg-path', '/tmp/tmp7i26bim1']
+[2026-03-03T12:09:54.632+0000] {standard_task_runner.py:88} INFO - Job 130: Subtask check_null_keys
+[2026-03-03T12:09:54.797+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_data_quality.check_null_keys manual__2026-03-03T12:08:21+00:00 [running]> on host 858cd869c16e
+[2026-03-03T12:09:54.982+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_data_quality' AIRFLOW_CTX_TASK_ID='check_null_keys' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T12:08:21+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T12:08:21+00:00'
+[2026-03-03T12:09:56.039+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/dag_data_quality.py", line 78, in check_null_keys
+    result = client.query_df(sql).iloc[0]
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/client.py", line 474, in query_df
+    return self._context_query(locals(), use_numpy=True, as_pandas=True).df_result
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/client.py", line 1124, in _context_query
+    return self._query_with_context((self.create_query_context(**kwargs)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 300, in _query_with_context
+    response = self._raw_request(body,
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 567, in _raw_request
+    self._error_handler(response)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 484, in _error_handler
+    raise OperationalError(err_str) if retried else DatabaseError(err_str) from None
+clickhouse_connect.driver.exceptions.DatabaseError: Received ClickHouse exception, code: 60, server response: Code: 60. DB::Exception: Unknown table expression identifier 'fact_orders' in scope SELECT SUM(multiIf(user_key IS NULL, 1, 0)) AS null_user_key, SUM(multiIf(product_key IS NULL, 1, 0)) AS null_product_key, SUM(multiIf(date_key IS NULL, 1, 0)) AS null_date_key FROM fact_orders. (UNKNOWN_TABLE) (for url http://clickhouse_olap:8123)
+[2026-03-03T12:09:56.086+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dag_data_quality, task_id=check_null_keys, execution_date=20260303T120821, start_date=20260303T120954, end_date=20260303T120956
+[2026-03-03T12:09:56.124+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 130 for task check_null_keys (Received ClickHouse exception, code: 60, server response: Code: 60. DB::Exception: Unknown table expression identifier 'fact_orders' in scope SELECT SUM(multiIf(user_key IS NULL, 1, 0)) AS null_user_key, SUM(multiIf(product_key IS NULL, 1, 0)) AS null_product_key, SUM(multiIf(date_key IS NULL, 1, 0)) AS null_date_key FROM fact_orders. (UNKNOWN_TABLE) (for url http://clickhouse_olap:8123); 897)
+[2026-03-03T12:09:56.177+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-03T12:09:56.241+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

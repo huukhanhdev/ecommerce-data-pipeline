@@ -1,0 +1,39 @@
+[2026-03-03T13:11:15.718+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_ingest_daily.extract manual__2026-03-03T11:34:59+00:00 [queued]>
+[2026-03-03T13:11:15.807+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_ingest_daily.extract manual__2026-03-03T11:34:59+00:00 [queued]>
+[2026-03-03T13:11:15.819+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 4
+[2026-03-03T13:11:16.302+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): extract> on 2026-03-03 11:34:59+00:00
+[2026-03-03T13:11:16.359+0000] {standard_task_runner.py:60} INFO - Started process 456 to run task
+[2026-03-03T13:11:16.664+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_ingest_daily', 'extract', 'manual__2026-03-03T11:34:59+00:00', '--job-id', '163', '--raw', '--subdir', 'DAGS_FOLDER/dag_ingest_daily.py', '--cfg-path', '/tmp/tmpnndv41y5']
+[2026-03-03T13:11:16.773+0000] {standard_task_runner.py:88} INFO - Job 163: Subtask extract
+[2026-03-03T13:11:17.917+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_ingest_daily.extract manual__2026-03-03T11:34:59+00:00 [running]> on host 353218a5daef
+[2026-03-03T13:11:20.398+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_ingest_daily' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T11:34:59+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T11:34:59+00:00'
+[2026-03-03T13:11:32.614+0000] {extractor.py:40} INFO - Connected to ecommerce_oltp@postgres_oltp
+[2026-03-03T13:11:32.636+0000] {extractor.py:135} INFO - === Daily extraction for 2026-03-03 ===
+[2026-03-03T13:11:32.644+0000] {extractor.py:113} INFO - Extracting static table: users
+[2026-03-03T13:11:32.653+0000] {extractor.py:66} INFO - Full extract: users
+[2026-03-03T13:11:32.875+0000] {extractor.py:61} INFO -   Fetched 500 rows
+[2026-03-03T13:11:32.892+0000] {extractor.py:113} INFO - Extracting static table: sellers
+[2026-03-03T13:11:32.893+0000] {extractor.py:66} INFO - Full extract: sellers
+[2026-03-03T13:11:32.917+0000] {extractor.py:61} INFO -   Fetched 50 rows
+[2026-03-03T13:11:32.921+0000] {extractor.py:113} INFO - Extracting static table: products
+[2026-03-03T13:11:32.931+0000] {extractor.py:66} INFO - Full extract: products
+[2026-03-03T13:11:32.992+0000] {extractor.py:61} INFO -   Fetched 200 rows
+[2026-03-03T13:11:33.003+0000] {extractor.py:113} INFO - Extracting static table: categories
+[2026-03-03T13:11:33.012+0000] {extractor.py:66} INFO - Full extract: categories
+[2026-03-03T13:11:33.061+0000] {extractor.py:61} INFO -   Fetched 10 rows
+[2026-03-03T13:11:33.067+0000] {extractor.py:74} INFO - Incremental extract: orders since 2026-03-03
+[2026-03-03T13:11:33.291+0000] {extractor.py:61} INFO -   Fetched 0 rows
+[2026-03-03T13:11:33.299+0000] {extractor.py:94} INFO - Incremental extract: order_items since 2026-03-03
+[2026-03-03T13:11:33.405+0000] {extractor.py:61} INFO -   Fetched 0 rows
+[2026-03-03T13:11:33.447+0000] {extractor.py:141} INFO -   users: 500 rows extracted
+[2026-03-03T13:11:33.512+0000] {extractor.py:141} INFO -   sellers: 50 rows extracted
+[2026-03-03T13:11:33.520+0000] {extractor.py:141} INFO -   products: 200 rows extracted
+[2026-03-03T13:11:33.533+0000] {extractor.py:141} INFO -   categories: 10 rows extracted
+[2026-03-03T13:11:33.577+0000] {extractor.py:141} INFO -   orders: 0 rows extracted
+[2026-03-03T13:11:33.636+0000] {extractor.py:141} INFO -   order_items: 0 rows extracted
+[2026-03-03T13:11:33.668+0000] {extractor.py:46} INFO - Connection closed
+[2026-03-03T13:11:36.545+0000] {logging_mixin.py:188} INFO - ✅ Extracted 760 total rows
+[2026-03-03T13:11:36.603+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-03T13:11:36.702+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag_ingest_daily, task_id=extract, execution_date=20260303T113459, start_date=20260303T131115, end_date=20260303T131136
+[2026-03-03T13:11:38.177+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-03T13:11:39.027+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,174 @@
+x-airflow-common: &airflow-common
+  image: apache/airflow:2.8.1-python3.11
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres_meta/airflow
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'false'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__WEBSERVER__EXPOSE_CONFIG: 'true'
+    PYTHONPATH: /opt/airflow
+    PIP_ADDITIONAL_REQUIREMENTS: >-
+      pandas==2.2.1
+      pyarrow==15.0.0
+      psycopg2-binary==2.9.9
+      clickhouse-connect==0.13.0
+      dbt-clickhouse==1.10.0
+    OLTP_HOST: postgres_oltp
+    OLTP_PORT: 5432
+    OLTP_DB: ${POSTGRES_OLTP_DB}
+    OLTP_USER: ${POSTGRES_USER}
+    OLTP_PASSWORD: ${POSTGRES_PASSWORD}
+    OLAP_HOST: clickhouse_olap
+    OLAP_PORT: 8123
+    OLAP_USER: ${CLICKHOUSE_USER}
+    OLAP_PASSWORD: ${CLICKHOUSE_PASSWORD}
+    OLAP_STAGING_DB: ${CLICKHOUSE_STAGING_DB}
+    OLAP_ANALYTICS_DB: ${CLICKHOUSE_ANALYTICS_DB}
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./ingestion:/opt/airflow/ingestion
+    - ./dbt:/opt/airflow/dbt
+    - ./data:/opt/airflow/data
+    - ./logs/airflow:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+  depends_on:
+    postgres_meta:
+      condition: service_healthy
+    postgres_oltp:
+      condition: service_healthy
+    clickhouse_olap:
+      condition: service_healthy
+
+services:
+  # ── Metadata DB for Airflow ──────────────────────────────────────────────
+  postgres_meta:
+    image: postgres:15-alpine
+    container_name: postgres_meta
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_meta_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "airflow" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── OLTP Database (Transactional / Source) ──────────────────────────────
+  postgres_oltp:
+    image: postgres:15-alpine
+    container_name: postgres_oltp
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_OLTP_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_oltp_data:/var/lib/postgresql/data
+      - ./sql/init_oltp.sql:/docker-entrypoint-initdb.d/init_oltp.sql
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_OLTP_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── OLAP Database (ClickHouse Warehouse) ───────────────────────────────
+  clickhouse_olap:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse_olap
+    environment:
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+      CLICKHOUSE_DB: ${CLICKHOUSE_STAGING_DB}
+    ports:
+      - "8123:8123"  # HTTP
+      - "9000:9000"  # Native
+    volumes:
+      - clickhouse_olap_data:/var/lib/clickhouse
+      - ./sql/init_olap.sql:/docker-entrypoint-initdb.d/init_olap.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "clickhouse-client --user ${CLICKHOUSE_USER} --password ${CLICKHOUSE_PASSWORD} --query 'SELECT 1'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Apache Spark ────────────────────────────────────────────────────────
+  # NOTE: Using official Apache Spark image (bitnami tags unavailable)
+  spark-master:
+    image: apache/spark:3.5.0
+    container_name: spark_master
+    user: root
+    entrypoint: [ "/opt/spark/sbin/start-master.sh" ]
+    environment:
+      SPARK_MASTER_HOST: spark-master
+      SPARK_MASTER_PORT: 7077
+      SPARK_MASTER_WEBUI_PORT: 8090
+    ports:
+      - "8090:8090" # Spark UI
+      - "7077:7077"
+    volumes:
+      - ./spark_jobs:/spark_jobs
+      - ./data:/data
+
+  spark-worker:
+    image: apache/spark:3.5.0
+    container_name: spark_worker
+    user: root
+    entrypoint: [ "/opt/spark/sbin/start-worker.sh", "spark://spark-master:7077" ]
+    environment:
+      SPARK_WORKER_MEMORY: 1g
+      SPARK_WORKER_CORES: 1
+    depends_on:
+      - spark-master
+    volumes:
+      - ./spark_jobs:/spark_jobs
+      - ./data:/data
+
+  # ── Airflow Init (runs once) ────────────────────────────────────────────
+  airflow-init:
+    <<: *airflow-common
+    container_name: airflow_init
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        airflow db migrate && \
+        airflow users create \
+          --username admin \
+          --firstname Admin \
+          --lastname User \
+          --role Admin \
+          --email admin@example.com \
+          --password admin
+    restart: on-failure
+
+  # ── Airflow Webserver ───────────────────────────────────────────────────
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: airflow_webserver
+    command: webserver
+    ports:
+      - "8080:8080"
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    restart: always
+
+  # ── Airflow Scheduler ───────────────────────────────────────────────────
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: airflow_scheduler
+    command: scheduler
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    restart: always
+
+volumes:
+  postgres_meta_data:
+  postgres_oltp_data:
+  clickhouse_olap_data:

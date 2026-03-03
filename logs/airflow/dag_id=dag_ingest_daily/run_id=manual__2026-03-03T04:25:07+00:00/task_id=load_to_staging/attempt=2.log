@@ -1,0 +1,80 @@
+[2026-03-03T04:30:19.822+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_ingest_daily.load_to_staging manual__2026-03-03T04:25:07+00:00 [queued]>
+[2026-03-03T04:30:19.831+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_ingest_daily.load_to_staging manual__2026-03-03T04:25:07+00:00 [queued]>
+[2026-03-03T04:30:19.832+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 3
+[2026-03-03T04:30:19.851+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): load_to_staging> on 2026-03-03 04:25:07+00:00
+[2026-03-03T04:30:19.861+0000] {standard_task_runner.py:60} INFO - Started process 543 to run task
+[2026-03-03T04:30:19.868+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_ingest_daily', 'load_to_staging', 'manual__2026-03-03T04:25:07+00:00', '--job-id', '66', '--raw', '--subdir', 'DAGS_FOLDER/dag_ingest_daily.py', '--cfg-path', '/tmp/tmpvbrs4rsi']
+[2026-03-03T04:30:19.873+0000] {standard_task_runner.py:88} INFO - Job 66: Subtask load_to_staging
+[2026-03-03T04:30:19.941+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_ingest_daily.load_to_staging manual__2026-03-03T04:25:07+00:00 [running]> on host eccf479b3cda
+[2026-03-03T04:30:20.032+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_ingest_daily' AIRFLOW_CTX_TASK_ID='load_to_staging' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T04:25:07+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T04:25:07+00:00'
+[2026-03-03T04:30:20.407+0000] {loader.py:39} INFO - StagingLoader connected to staging@clickhouse_olap
+[2026-03-03T04:30:20.408+0000] {loader.py:81} INFO - === Loading to staging (exec_date=2026-03-03) ===
+[2026-03-03T04:30:20.417+0000] {loader.py:51} INFO -   Truncated staging.stg_users
+[2026-03-03T04:30:20.438+0000] {loader.py:77} INFO -   ✅ Loaded 500 rows → staging.stg_users
+[2026-03-03T04:30:20.443+0000] {loader.py:51} INFO -   Truncated staging.stg_sellers
+[2026-03-03T04:30:20.450+0000] {loader.py:77} INFO -   ✅ Loaded 50 rows → staging.stg_sellers
+[2026-03-03T04:30:20.455+0000] {loader.py:51} INFO -   Truncated staging.stg_products
+[2026-03-03T04:30:20.463+0000] {loader.py:77} INFO -   ✅ Loaded 200 rows → staging.stg_products
+[2026-03-03T04:30:20.467+0000] {loader.py:51} INFO -   Truncated staging.stg_categories
+[2026-03-03T04:30:20.471+0000] {transform.py:120} ERROR - Error serializing column `parent_id` into data type `Int32`
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/transform.py", line 114, in chunk_gen
+    col_type.write_column(data, output, context)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/datatypes/base.py", line 215, in write_column
+    self.write_column_data(column, dest, ctx)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/datatypes/base.py", line 230, in write_column_data
+    self._write_column_binary(column, dest, ctx)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/datatypes/numeric.py", line 32, in _write_column_binary
+    column = [int(x) for x in column]
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/datatypes/numeric.py", line 32, in <listcomp>
+    column = [int(x) for x in column]
+              ^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NAType'
+[2026-03-03T04:30:20.474+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/dag_ingest_daily.py", line 116, in load_to_staging
+    loader.load_all(data, execution_date=execution_date)
+  File "/opt/airflow/ingestion/loader.py", line 83, in load_all
+    self.load(table_name, df, execution_date)
+  File "/opt/airflow/ingestion/loader.py", line 76, in load
+    self.client.insert_df(stg_table, df, database=self.staging_db)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/client.py", line 899, in insert_df
+    return self.insert(table,
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/client.py", line 864, in insert
+    return self.data_insert(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 343, in data_insert
+    response = self._raw_request(block_gen, params, headers, error_handler=error_handler, server_wait=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 565, in _raw_request
+    error_handler(response)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/httpclient.py", line 327, in error_handler
+    raise ex
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/driver/transform.py", line 114, in chunk_gen
+    col_type.write_column(data, output, context)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/datatypes/base.py", line 215, in write_column
+    self.write_column_data(column, dest, ctx)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/datatypes/base.py", line 230, in write_column_data
+    self._write_column_binary(column, dest, ctx)
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/datatypes/numeric.py", line 32, in _write_column_binary
+    column = [int(x) for x in column]
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/clickhouse_connect/datatypes/numeric.py", line 32, in <listcomp>
+    column = [int(x) for x in column]
+              ^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NAType'
+[2026-03-03T04:30:20.493+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=dag_ingest_daily, task_id=load_to_staging, execution_date=20260303T042507, start_date=20260303T043019, end_date=20260303T043020
+[2026-03-03T04:30:20.513+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 66 for task load_to_staging (int() argument must be a string, a bytes-like object or a real number, not 'NAType'; 543)
+[2026-03-03T04:30:20.553+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-03T04:30:20.575+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

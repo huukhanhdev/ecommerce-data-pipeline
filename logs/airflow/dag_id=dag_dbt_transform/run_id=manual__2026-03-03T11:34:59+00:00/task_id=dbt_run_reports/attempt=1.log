@@ -1,0 +1,61 @@
+[2026-03-03T11:35:57.838+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_run_reports manual__2026-03-03T11:34:59+00:00 [queued]>
+[2026-03-03T11:35:57.849+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_run_reports manual__2026-03-03T11:34:59+00:00 [queued]>
+[2026-03-03T11:35:57.849+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-03T11:35:57.863+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run_reports> on 2026-03-03 11:34:59+00:00
+[2026-03-03T11:35:57.870+0000] {standard_task_runner.py:60} INFO - Started process 9514 to run task
+[2026-03-03T11:35:57.875+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_dbt_transform', 'dbt_run_reports', 'manual__2026-03-03T11:34:59+00:00', '--job-id', '89', '--raw', '--subdir', 'DAGS_FOLDER/dag_dbt_transform.py', '--cfg-path', '/tmp/tmpuy1u2pls']
+[2026-03-03T11:35:57.880+0000] {standard_task_runner.py:88} INFO - Job 89: Subtask dbt_run_reports
+[2026-03-03T11:35:57.973+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_dbt_transform.dbt_run_reports manual__2026-03-03T11:34:59+00:00 [running]> on host eccf479b3cda
+[2026-03-03T11:35:58.054+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_dbt_transform' AIRFLOW_CTX_TASK_ID='dbt_run_reports' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T11:34:59+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T11:34:59+00:00'
+[2026-03-03T11:35:58.056+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-03-03T11:35:58.056+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/***/dbt && dbt run --select reports --profiles-dir /opt/***/dbt --project-dir /opt/***/dbt']
+[2026-03-03T11:35:58.062+0000] {subprocess.py:86} INFO - Output:
+[2026-03-03T11:36:00.219+0000] {subprocess.py:93} INFO - [0m11:36:00  Running with dbt=1.11.6
+[2026-03-03T11:36:00.739+0000] {subprocess.py:93} INFO - [0m11:36:00  Registered adapter: clickhouse=1.10.0
+[2026-03-03T11:36:01.520+0000] {subprocess.py:93} INFO - [0m11:36:01  Found 12 models, 32 data tests, 6 sources, 523 macros
+[2026-03-03T11:36:01.524+0000] {subprocess.py:93} INFO - [0m11:36:01
+[2026-03-03T11:36:01.525+0000] {subprocess.py:93} INFO - [0m11:36:01  Concurrency: 4 threads (target='dev')
+[2026-03-03T11:36:01.526+0000] {subprocess.py:93} INFO - [0m11:36:01
+[2026-03-03T11:36:02.499+0000] {subprocess.py:93} INFO - [0m11:36:02  1 of 3 START sql table model `staging_analytics`.`rpt_daily_revenue` ........... [RUN]
+[2026-03-03T11:36:02.501+0000] {subprocess.py:93} INFO - [0m11:36:02  2 of 3 START sql table model `staging_analytics`.`rpt_product_performance` ..... [RUN]
+[2026-03-03T11:36:02.502+0000] {subprocess.py:93} INFO - [0m11:36:02  3 of 3 START sql table model `staging_analytics`.`rpt_seller_ranking` .......... [RUN]
+[2026-03-03T11:36:02.691+0000] {subprocess.py:93} INFO - [0m11:36:02  2 of 3 ERROR creating sql table model `staging_analytics`.`rpt_product_performance`  [[31mERROR[0m in 0.18s]
+[2026-03-03T11:36:02.693+0000] {subprocess.py:93} INFO - [0m11:36:02  1 of 3 ERROR creating sql table model `staging_analytics`.`rpt_daily_revenue` .. [[31mERROR[0m in 0.18s]
+[2026-03-03T11:36:02.751+0000] {subprocess.py:93} INFO - [0m11:36:02  3 of 3 ERROR creating sql table model `staging_analytics`.`rpt_seller_ranking` . [[31mERROR[0m in 0.24s]
+[2026-03-03T11:36:02.784+0000] {subprocess.py:93} INFO - [0m11:36:02
+[2026-03-03T11:36:02.788+0000] {subprocess.py:93} INFO - [0m11:36:02  Finished running 3 table models in 0 hours 0 minutes and 1.25 seconds (1.25s).
+[2026-03-03T11:36:03.088+0000] {subprocess.py:93} INFO - [0m11:36:03
+[2026-03-03T11:36:03.094+0000] {subprocess.py:93} INFO - [0m11:36:03  [31mCompleted with 3 errors, 0 partial successes, and 0 warnings:[0m
+[2026-03-03T11:36:03.097+0000] {subprocess.py:93} INFO - [0m11:36:03
+[2026-03-03T11:36:03.099+0000] {subprocess.py:93} INFO - [0m11:36:03  [31mFailure in model rpt_product_performance (models/reports/rpt_product_performance.sql)[0m
+[2026-03-03T11:36:03.102+0000] {subprocess.py:93} INFO - [0m11:36:03    Database Error in model rpt_product_performance (models/reports/rpt_product_performance.sql)
+[2026-03-03T11:36:03.111+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 47, server response: Code: 47. DB::Exception: Identifier 'f.order_id' cannot be resolved from table with name f. In scope  product_sales. Maybe you meant: ['oi.order_id']. (UNKNOWN_IDENTIFIER) (for url http://clickhouse_olap:8123)
+[2026-03-03T11:36:03.119+0000] {subprocess.py:93} INFO - [0m11:36:03
+[2026-03-03T11:36:03.120+0000] {subprocess.py:93} INFO - [0m11:36:03    compiled code at target/compiled/ecommerce_dbt/models/reports/rpt_product_performance.sql
+[2026-03-03T11:36:03.128+0000] {subprocess.py:93} INFO - [0m11:36:03
+[2026-03-03T11:36:03.136+0000] {subprocess.py:93} INFO - [0m11:36:03  [31mFailure in model rpt_daily_revenue (models/reports/rpt_daily_revenue.sql)[0m
+[2026-03-03T11:36:03.140+0000] {subprocess.py:93} INFO - [0m11:36:03    Database Error in model rpt_daily_revenue (models/reports/rpt_daily_revenue.sql)
+[2026-03-03T11:36:03.143+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 47, server response: Code: 47. DB::Exception: Identifier 'f.order_id' cannot be resolved from table with name f. In scope  daily_rev. Maybe you meant: ['oi.order_id']. (UNKNOWN_IDENTIFIER) (for url http://clickhouse_olap:8123)
+[2026-03-03T11:36:03.144+0000] {subprocess.py:93} INFO - [0m11:36:03
+[2026-03-03T11:36:03.148+0000] {subprocess.py:93} INFO - [0m11:36:03    compiled code at target/compiled/ecommerce_dbt/models/reports/rpt_daily_revenue.sql
+[2026-03-03T11:36:03.150+0000] {subprocess.py:93} INFO - [0m11:36:03
+[2026-03-03T11:36:03.154+0000] {subprocess.py:93} INFO - [0m11:36:03  [31mFailure in model rpt_seller_ranking (models/reports/rpt_seller_ranking.sql)[0m
+[2026-03-03T11:36:03.158+0000] {subprocess.py:93} INFO - [0m11:36:03    Database Error in model rpt_seller_ranking (models/reports/rpt_seller_ranking.sql)
+[2026-03-03T11:36:03.159+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 47, server response: Code: 47. DB::Exception: Identifier 'f.order_id' cannot be resolved from table with name f. In scope  seller_stats. Maybe you meant: ['oi.order_id']. (UNKNOWN_IDENTIFIER) (for url http://clickhouse_olap:8123)
+[2026-03-03T11:36:03.160+0000] {subprocess.py:93} INFO - [0m11:36:03
+[2026-03-03T11:36:03.163+0000] {subprocess.py:93} INFO - [0m11:36:03    compiled code at target/compiled/ecommerce_dbt/models/reports/rpt_seller_ranking.sql
+[2026-03-03T11:36:03.173+0000] {subprocess.py:93} INFO - [0m11:36:03
+[2026-03-03T11:36:03.176+0000] {subprocess.py:93} INFO - [0m11:36:03  Done. PASS=0 WARN=0 ERROR=3 SKIP=0 NO-OP=0 TOTAL=3
+[2026-03-03T11:36:07.252+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-03-03T11:36:07.323+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-03-03T11:36:07.335+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=dag_dbt_transform, task_id=dbt_run_reports, execution_date=20260303T113459, start_date=20260303T113557, end_date=20260303T113607
+[2026-03-03T11:36:07.372+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 89 for task dbt_run_reports (Bash command failed. The command returned a non-zero exit code 1.; 9514)
+[2026-03-03T11:36:07.438+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-03T11:36:07.565+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

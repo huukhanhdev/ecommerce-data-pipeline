@@ -1,0 +1,14 @@
+[2026-03-03T16:27:28.103+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_data_quality.check_null_keys manual__2026-03-02T16:25:46+00:00 [queued]>
+[2026-03-03T16:27:28.110+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_data_quality.check_null_keys manual__2026-03-02T16:25:46+00:00 [queued]>
+[2026-03-03T16:27:28.111+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2026-03-03T16:27:28.120+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_null_keys> on 2026-03-02 16:25:46+00:00
+[2026-03-03T16:27:28.123+0000] {standard_task_runner.py:60} INFO - Started process 8651 to run task
+[2026-03-03T16:27:28.125+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_data_quality', 'check_null_keys', 'manual__2026-03-02T16:25:46+00:00', '--job-id', '277', '--raw', '--subdir', 'DAGS_FOLDER/dag_data_quality.py', '--cfg-path', '/tmp/tmp7ff94d0_']
+[2026-03-03T16:27:28.128+0000] {standard_task_runner.py:88} INFO - Job 277: Subtask check_null_keys
+[2026-03-03T16:27:28.175+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_data_quality.check_null_keys manual__2026-03-02T16:25:46+00:00 [running]> on host 353218a5daef
+[2026-03-03T16:27:28.246+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_data_quality' AIRFLOW_CTX_TASK_ID='check_null_keys' AIRFLOW_CTX_EXECUTION_DATE='2026-03-02T16:25:46+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-02T16:25:46+00:00'
+[2026-03-03T16:27:28.576+0000] {logging_mixin.py:188} INFO - ✅ No NULL foreign keys
+[2026-03-03T16:27:28.577+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-03T16:27:28.589+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag_data_quality, task_id=check_null_keys, execution_date=20260302T162546, start_date=20260303T162728, end_date=20260303T162728
+[2026-03-03T16:27:28.633+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-03T16:27:28.658+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

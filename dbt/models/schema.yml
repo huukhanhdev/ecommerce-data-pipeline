@@ -1,0 +1,92 @@
+version: 2
+
+sources:
+  - name: staging
+    database: "{{ env_var('OLAP_STAGING_DB', 'staging') }}"
+    schema: "{{ env_var('OLAP_STAGING_DB', 'staging') }}"
+    tables:
+      - name: stg_orders
+      - name: stg_order_items
+      - name: stg_users
+      - name: stg_sellers
+      - name: stg_products
+      - name: stg_categories
+
+models:
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests: [not_null, unique]
+      - name: user_id
+        tests: [not_null]
+      - name: status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['pending','confirmed','shipped','delivered','cancelled','returned']
+
+  - name: stg_order_items
+    columns:
+      - name: item_id
+        tests: [not_null, unique]
+      - name: order_id
+        tests: [not_null]
+      - name: quantity
+        tests: [not_null]
+      - name: unit_price
+        tests: [not_null]
+
+  - name: stg_users
+    columns:
+      - name: user_id
+        tests: [not_null, unique]
+      - name: email
+        tests: [not_null, unique]
+
+  - name: stg_products
+    columns:
+      - name: product_id
+        tests: [not_null, unique]
+
+  - name: dim_date
+    columns:
+      - name: date_key
+        tests: [not_null, unique]
+
+  - name: dim_users
+    columns:
+      - name: user_key
+        tests: [not_null, unique]
+
+  - name: dim_products
+    columns:
+      - name: product_key
+        tests: [not_null, unique]
+
+  - name: dim_sellers
+    columns:
+      - name: seller_key
+        tests: [not_null, unique]
+
+  - name: fact_orders
+    columns:
+      - name: order_item_key
+        tests: [not_null, unique]
+      - name: user_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_users')
+              field: user_key
+      - name: product_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_key
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key

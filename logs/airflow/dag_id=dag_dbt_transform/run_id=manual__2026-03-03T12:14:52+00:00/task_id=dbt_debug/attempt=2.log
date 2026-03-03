@@ -1,0 +1,62 @@
+[2026-03-03T13:13:27.222+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_debug manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T13:13:27.258+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_dbt_transform.dbt_debug manual__2026-03-03T12:14:52+00:00 [queued]>
+[2026-03-03T13:13:27.260+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 3
+[2026-03-03T13:13:27.342+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_debug> on 2026-03-03 12:14:52+00:00
+[2026-03-03T13:13:27.373+0000] {standard_task_runner.py:60} INFO - Started process 1156 to run task
+[2026-03-03T13:13:27.459+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag_dbt_transform', 'dbt_debug', 'manual__2026-03-03T12:14:52+00:00', '--job-id', '224', '--raw', '--subdir', 'DAGS_FOLDER/dag_dbt_transform.py', '--cfg-path', '/tmp/tmpfxk5176z']
+[2026-03-03T13:13:27.478+0000] {standard_task_runner.py:88} INFO - Job 224: Subtask dbt_debug
+[2026-03-03T13:13:28.001+0000] {task_command.py:423} INFO - Running <TaskInstance: dag_dbt_transform.dbt_debug manual__2026-03-03T12:14:52+00:00 [running]> on host 353218a5daef
+[2026-03-03T13:13:28.410+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='de_team' AIRFLOW_CTX_DAG_ID='dag_dbt_transform' AIRFLOW_CTX_TASK_ID='dbt_debug' AIRFLOW_CTX_EXECUTION_DATE='2026-03-03T12:14:52+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-03T12:14:52+00:00'
+[2026-03-03T13:13:28.419+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-03-03T13:13:28.422+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/***/dbt && dbt debug --profiles-dir /opt/***/dbt --project-dir /opt/***/dbt || true']
+[2026-03-03T13:13:28.560+0000] {subprocess.py:86} INFO - Output:
+[2026-03-03T13:13:41.777+0000] {subprocess.py:93} INFO - [0m13:13:41  Running with dbt=1.11.6
+[2026-03-03T13:13:41.884+0000] {subprocess.py:93} INFO - [0m13:13:41  dbt version: 1.11.6
+[2026-03-03T13:13:41.893+0000] {subprocess.py:93} INFO - [0m13:13:41  python version: 3.11.8
+[2026-03-03T13:13:41.908+0000] {subprocess.py:93} INFO - [0m13:13:41  python path: /usr/local/bin/python
+[2026-03-03T13:13:41.916+0000] {subprocess.py:93} INFO - [0m13:13:41  os info: Linux-6.10.14-linuxkit-aarch64-with-glibc2.36
+[2026-03-03T13:13:42.790+0000] {subprocess.py:93} INFO - [0m13:13:42  Using profiles dir at /opt/***/dbt
+[2026-03-03T13:13:42.818+0000] {subprocess.py:93} INFO - [0m13:13:42  Using profiles.yml file at /opt/***/dbt/profiles.yml
+[2026-03-03T13:13:42.850+0000] {subprocess.py:93} INFO - [0m13:13:42  Using dbt_project.yml file at /opt/***/dbt/dbt_project.yml
+[2026-03-03T13:13:42.861+0000] {subprocess.py:93} INFO - [0m13:13:42  adapter type: clickhouse
+[2026-03-03T13:13:42.882+0000] {subprocess.py:93} INFO - [0m13:13:42  adapter version: 1.10.0
+[2026-03-03T13:13:43.448+0000] {subprocess.py:93} INFO - [0m13:13:43  Configuration:
+[2026-03-03T13:13:43.468+0000] {subprocess.py:93} INFO - [0m13:13:43    profiles.yml file [[32mOK found and valid[0m]
+[2026-03-03T13:13:43.481+0000] {subprocess.py:93} INFO - [0m13:13:43    dbt_project.yml file [[32mOK found and valid[0m]
+[2026-03-03T13:13:43.614+0000] {subprocess.py:93} INFO - [0m13:13:43  Required dependencies:
+[2026-03-03T13:13:43.714+0000] {subprocess.py:93} INFO - [0m13:13:43   - git [[31mERROR[0m]
+[2026-03-03T13:13:43.751+0000] {subprocess.py:93} INFO - 
+[2026-03-03T13:13:43.814+0000] {subprocess.py:93} INFO - [0m13:13:43  Connection:
+[2026-03-03T13:13:43.818+0000] {subprocess.py:93} INFO - [0m13:13:43    driver: None
+[2026-03-03T13:13:43.831+0000] {subprocess.py:93} INFO - [0m13:13:43    host: clickhouse_olap
+[2026-03-03T13:13:43.850+0000] {subprocess.py:93} INFO - [0m13:13:43    port: 8123
+[2026-03-03T13:13:43.874+0000] {subprocess.py:93} INFO - [0m13:13:43    user: default
+[2026-03-03T13:13:43.875+0000] {subprocess.py:93} INFO - [0m13:13:43    schema: staging
+[2026-03-03T13:13:43.883+0000] {subprocess.py:93} INFO - [0m13:13:43    retries: 1
+[2026-03-03T13:13:43.899+0000] {subprocess.py:93} INFO - [0m13:13:43    cluster: None
+[2026-03-03T13:13:43.908+0000] {subprocess.py:93} INFO - [0m13:13:43    database_engine: None
+[2026-03-03T13:13:43.928+0000] {subprocess.py:93} INFO - [0m13:13:43    cluster_mode: False
+[2026-03-03T13:13:43.960+0000] {subprocess.py:93} INFO - [0m13:13:43    secure: False
+[2026-03-03T13:13:43.992+0000] {subprocess.py:93} INFO - [0m13:13:43    verify: True
+[2026-03-03T13:13:44.002+0000] {subprocess.py:93} INFO - [0m13:13:44    client_cert: None
+[2026-03-03T13:13:44.016+0000] {subprocess.py:93} INFO - [0m13:13:44    client_cert_key: None
+[2026-03-03T13:13:44.032+0000] {subprocess.py:93} INFO - [0m13:13:44    connect_timeout: 10
+[2026-03-03T13:13:44.043+0000] {subprocess.py:93} INFO - [0m13:13:44    send_receive_timeout: 300
+[2026-03-03T13:13:44.058+0000] {subprocess.py:93} INFO - [0m13:13:44    sync_request_timeout: 5
+[2026-03-03T13:13:44.075+0000] {subprocess.py:93} INFO - [0m13:13:44    compress_block_size: 1048576
+[2026-03-03T13:13:44.089+0000] {subprocess.py:93} INFO - [0m13:13:44    compression:
+[2026-03-03T13:13:44.108+0000] {subprocess.py:93} INFO - [0m13:13:44    check_exchange: True
+[2026-03-03T13:13:44.130+0000] {subprocess.py:93} INFO - [0m13:13:44    custom_settings: None
+[2026-03-03T13:13:44.134+0000] {subprocess.py:93} INFO - [0m13:13:44    use_lw_deletes: False
+[2026-03-03T13:13:44.159+0000] {subprocess.py:93} INFO - [0m13:13:44    allow_automatic_deduplication: False
+[2026-03-03T13:13:44.162+0000] {subprocess.py:93} INFO - [0m13:13:44    tcp_keepalive: False
+[2026-03-03T13:13:44.164+0000] {subprocess.py:93} INFO - [0m13:13:44  Registered adapter: clickhouse=1.10.0
+[2026-03-03T13:13:47.147+0000] {subprocess.py:93} INFO - [0m13:13:47    Connection test: [[32mOK connection ok[0m]
+[2026-03-03T13:13:47.193+0000] {subprocess.py:93} INFO - 
+[2026-03-03T13:13:47.195+0000] {subprocess.py:93} INFO - [0m13:13:47  [31m1 check failed:[0m
+[2026-03-03T13:13:47.208+0000] {subprocess.py:93} INFO - [0m13:13:47  Error from git --help: User does not have permissions for this command: "git"
+[2026-03-03T13:13:47.208+0000] {subprocess.py:93} INFO - 
+[2026-03-03T13:13:54.427+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-03-03T13:13:54.849+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag_dbt_transform, task_id=dbt_debug, execution_date=20260303T121452, start_date=20260303T131327, end_date=20260303T131354
+[2026-03-03T13:13:55.012+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-03T13:13:55.696+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

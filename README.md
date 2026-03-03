@@ -137,10 +137,6 @@ de_project/
 | Marts | `dim_date`, `dim_users`, `dim_products`, `dim_sellers`, `fact_orders` | Tables |
 | Reports | `rpt_daily_revenue`, `rpt_seller_ranking`, `rpt_product_performance` | Tables |
 
-Key SQL techniques used: `JOIN`, `GROUP BY`, `RANK()`, `PERCENT_RANK()`, `SUM() OVER`, rolling averages.
-Note: To effectively bypass incremental load duplication, ClickHouse `ROW_NUMBER() OVER(PARTITION BY id ORDER BY _loaded_at DESC)` window logic ensures unique entities pass downstream pipeline validations directly at staging extraction.
-Note: To effectively bypass incremental load duplication, ClickHouse `ROW_NUMBER() OVER(PARTITION BY _id ORDER BY _loaded_at DESC)` window logic ensures unique entities passing validations directly down pipelines.
-Note: Staging models currently implement standard ClickHouse `ROW_NUMBER() OVER (PARTITION BY ... ORDER BY _loaded_at DESC)` filtering window function logic within CTEs directly to inherently handle CDC duplicate extraction logic natively.
 
 ## Star Schema
 
